@@ -3,8 +3,8 @@ function IFA = CalculateIFA(actLabel, probPos, LA_LD)
 %   Detailed explanation goes here
 % INPUTS:
 %   (1) actLabel - A column vector where 1 and 0 denote the defective class and non-defective class, respectively. 
-%   (2) probPos  - A column vector having the same size as actLabel.
-%   (3) LA_LD - 
+%   (2) probPos  - A column vector (the predicted probability being positive/predictive class) having the same size as actLabel.
+%   (3) LA_LD - A column vector where each element is the sum of LA and LD which are two metrics for just-in-time software defect prediction.
 % OUTPUTS:
 %  
 %  
@@ -19,16 +19,23 @@ function IFA = CalculateIFA(actLabel, probPos, LA_LD)
 %
 
 
-idx = [];
 if ~exist('LA_LD','var')||isempty(LA_LD)
-    [val, idx] = sort(probPos, 'descend');
+    [~, idx] = sort(probPos, 'descend');  % Ni et al. [2]
+    temp = actLabel(idx);
+else
+    [~, idx] = sort(probPos, 'descend');
+    sort_actLabel = actLabel(idx);
+    sort_LA_LD = LA_LD(idx);
+    [~, idx1] = sort(sort_LA_LD, 'ascend'); % Huang et al. [1]
+    temp = sort_actLabel(idx1);
 end
-if ~exist('probPos','var')||isempty(probPos)
-    [val, idx] = sort(LA_LD, 'ascend');
-end
-temp = actLabel(idx);
 index = find(temp==1);
-IFA = index(1)-1; % index(1) includes a true positive instance in the end
+if ~isempty(index)
+    IFA = index(1)-1;
+else
+    IFA = length(index);
+end
+
 
 
 end
