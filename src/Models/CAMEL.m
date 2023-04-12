@@ -13,7 +13,7 @@ function probPos = CAMEL(sources, target, alpha)
 % Reference: [1] E. Kim, J. Baik, and D. Ryu, "Heterogeneous defect prediction
 %     through correlation-based selection of multiple source projects and
 %     ensemble learning" in 2021 IEEE 21st International Conference on
-%     Software Quality, Reliability and Security (QRS), 2021, pp. 503¨C513.
+%     Software Quality, Reliability and Security (QRS), 2021, pp. 503â€“513.
 %
 % Writen by Haonan Tong (hntong@bjtu.edu.cn)
 % 
@@ -111,7 +111,7 @@ searchMethod = weka.attributeSelection.Ranker(); % weka.attributeSelection.BestF
 attrSelector.setEvaluator(gainRatio);
 attrSelector.setSearch(searchMethod);
 attrSelector.SelectAttributes(insts);
-selAttrIndex = attrSelector.selectedAttributes(); % ·µ»ØÒ»¸öÁÐÏòÁ¿(ÌØÕ÷+Òò±äÁ¿µÄË÷Òý)(×¢Òâ£ºË÷Òý×ñÑ­weka±ê×¼£¬¼´´ÓÁã¿ªÊ¼)
+selAttrIndex = attrSelector.selectedAttributes(); % è¿”å›žä¸€ä¸ªåˆ—å‘é‡(ç‰¹å¾+å› å˜é‡çš„ç´¢å¼•)(æ³¨æ„ï¼šç´¢å¼•éµå¾ªwekaæ ‡å‡†ï¼Œå³ä»Žé›¶å¼€å§‹)
 source = source(:, selAttrIndex+1); % adjust the position of all features
 sourceX = source(:, 1:floor((size(source,2)-1)*selectRatio));
 simSrc= [sourceX, source(:,end)];
@@ -192,7 +192,7 @@ end
 % Find the best matches
 if length(unique(A)) > 1
     isMatched = true;
-    munk = py.munkres.Munkres();
+    munk = py.munkres.Munkres(); % Must first install Python and the package 'munkres'.
     cost_matrix = py.munkres.make_cost_matrix(py.numpy.array(A)); % Call Python function, Must first install Python and the corresponding package.
     idxMatch = munk.compute(cost_matrix);
     idxMatch = double(py.numpy.array(idxMatch)) + 1; % For python, the index starts from 0, but it starts from 1 for MATLAB. 
