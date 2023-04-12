@@ -47,7 +47,14 @@ Balance = 1 - sqrt(((0-PF)^2+(1-PD)^2)/2);
 
 nMCC = (MCC+1)/2; % See "An Improved Method for Training Data Selection for Cross-Project Defect Prediction"
 G_Mean = sqrt(PD*(1-PF)); 
-Popt20 = CalculatePopt(actLabel, predict_label, LOC);
+if ~isempty(LOC)
+    Popt20 = CalculatePopt(actLabel, predict_label, LOC);
+    cost_effectiveness = costEffectiveness(actLabel, probPos, LOC);
+else
+    Popt20 = [];
+    cost_effectiveness = [];
+end
+
 cost_effectiveness = costEffectiveness(actLabel, probPos, LOC);
 % IFA = CalculateIFA(actual_label, probPos);
 
