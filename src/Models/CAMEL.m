@@ -192,7 +192,7 @@ end
 % Find the best matches
 if length(unique(A)) > 1
     isMatched = true;
-    munk = py.munkres.Munkres(); % Must first install Python and the package 'munkres'.
+    munk = py.munkres.Munkres(); % Must first install Python (note its verison) and package 'munkres'. If MATLAB 2018b is using, you must install py3.5 or 3.6.
     cost_matrix = py.munkres.make_cost_matrix(py.numpy.array(A)); % Call Python function, Must first install Python and the corresponding package.
     idxMatch = munk.compute(cost_matrix);
     idxMatch = double(py.numpy.array(idxMatch)) + 1; % For python, the index starts from 0, but it starts from 1 for MATLAB. 
