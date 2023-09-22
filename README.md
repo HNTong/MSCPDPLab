@@ -13,6 +13,7 @@ If you use this toolbox in your research, consider cite our work:
      volume = {21},
      pages = {101286},
      year = {2023},
-     author = {Jiaqi Zou and Zonghao Li and Xuanying Liu and Haonan Tong},}
+     author = {Jiaqi Zou and Zonghao Li and Xuanying Liu and Haonan Tong},
+}
 ```
 
